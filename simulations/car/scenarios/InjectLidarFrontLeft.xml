@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scenario>
+	<at t="0.011">
+		<set-param module="labelManager" par="label" value="switchFrontLeft_SLidarFrontLeft_INJECTION"/>
+		<set-param module="switchFrontLeft.eth[0].macLayer.corruptLinkLayer" par="probability" value="0.5"/>
+		<set-param module="switchFrontLeft.eth[0].macLayer.corruptLinkLayer" par="minInterval" value="1ms"/>
+		<set-param module="switchFrontLeft.eth[0].macLayer.corruptLinkLayer" par="injectionInterval" value="150us"/>
+		<set-param module="switchFrontLeft.eth[0].macLayer.corruptLinkLayer" par="destPort" value="2111"/>
+		<set-param module="switchFrontLeft.eth[0].macLayer.corruptLinkLayer" par="srcPort" value="1025"/>
+		<set-param module="switchFrontLeft.eth[0].macLayer.corruptLinkLayer" par="destIpAddress" value="10.0.0.5"/>
+		<set-param module="switchFrontLeft.eth[0].macLayer.corruptLinkLayer" par="srcIpAddress" value="10.0.0.12"/>
+		<set-param module="switchFrontLeft.eth[0].macLayer.corruptLinkLayer" par="destMacAddress" value="0A-AA-00-00-00-22"/>
+		<set-param module="switchFrontLeft.eth[0].macLayer.corruptLinkLayer" par="srcMacAddress" value="0A-AA-00-00-00-1B"/>
+		<set-param module="switchFrontLeft.eth[0].macLayer.corruptLinkLayer" par="priority" value="5"/>
+		<set-param module="switchFrontLeft.eth[0].macLayer.corruptLinkLayer" par="vid" value="1"/>
+		<set-param module="switchFrontLeft.eth[0].macLayer.corruptLinkLayer" par="payload" value="intWithUnit(uniform(0Byte,1472Byte))"/>
+	</at>
+	<at t="12">
+	    <set-param module="labelManager" par="label" value=""/>
+		<set-param module="switchFrontLeft.eth[0].macLayer.corruptLinkLayer" par="injectionInterval" value="0s"/>
+	</at>
+</scenario>

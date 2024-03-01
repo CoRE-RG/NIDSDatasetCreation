@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scenario>
+	<at t="2">
+		<set-param module="labelManager" par="label" value="switchRearRight_SAutoBrake_PACKET_LOSS"/>
+        <set-param module="switchRearRight.eth[0].macLayer.corruptLinkLayer" par="packetFilter" value="expr(has(udp) &amp;&amp; udp.destPort == 2100)"/>
+		<set-param module="switchRearRight.eth[0].macLayer.corruptLinkLayer" par="probability" value="0.5"/>
+		<set-param module="switchRearRight.eth[0].macLayer.corruptLinkLayer" par="minInterval" value="10ms"/>
+	</at>
+	<at t="3">
+	    <set-param module="labelManager" par="label" value=""/>
+		<set-param module="switchRearRight.eth[0].macLayer.corruptLinkLayer" par="packetFilter" value='""'/>
+	</at>
+	<at t="4">
+		<set-param module="labelManager" par="label" value="switchRearRight_SAutoBrake_PACKET_LOSS"/>
+        <set-param module="switchRearRight.eth[0].macLayer.corruptLinkLayer" par="packetFilter" value="expr(has(udp) &amp;&amp; udp.destPort == 2100)"/>
+	</at>
+	<at t="5">
+	    <set-param module="labelManager" par="label" value=""/>
+		<set-param module="switchRearRight.eth[0].macLayer.corruptLinkLayer" par="packetFilter" value='""'/>
+	</at>
+	<at t="6">
+		<set-param module="labelManager" par="label" value="switchRearRight_SAutoBrake_PACKET_LOSS"/>
+        <set-param module="switchRearRight.eth[0].macLayer.corruptLinkLayer" par="packetFilter" value="expr(has(udp) &amp;&amp; udp.destPort == 2100)"/>
+	</at>
+	<at t="7">
+	    <set-param module="labelManager" par="label" value=""/>
+		<set-param module="switchRearRight.eth[0].macLayer.corruptLinkLayer" par="packetFilter" value='""'/>
+	</at>
+	<at t="8">
+		<set-param module="labelManager" par="label" value="switchRearRight_SAutoBrake_PACKET_LOSS"/>
+        <set-param module="switchRearRight.eth[0].macLayer.corruptLinkLayer" par="packetFilter" value="expr(has(udp) &amp;&amp; udp.destPort == 2100)"/>
+	</at>
+	<at t="9">
+	    <set-param module="labelManager" par="label" value=""/>
+		<set-param module="switchRearRight.eth[0].macLayer.corruptLinkLayer" par="packetFilter" value='""'/>
+	</at>
+	<at t="10">
+		<set-param module="labelManager" par="label" value="switchRearRight_SAutoBrake_PACKET_LOSS"/>
+        <set-param module="switchRearRight.eth[0].macLayer.corruptLinkLayer" par="packetFilter" value="expr(has(udp) &amp;&amp; udp.destPort == 2100)"/>
+	</at>
+	<at t="11">
+	    <set-param module="labelManager" par="label" value=""/>
+		<set-param module="switchRearRight.eth[0].macLayer.corruptLinkLayer" par="packetFilter" value='""'/>
+	</at>
+</scenario>
