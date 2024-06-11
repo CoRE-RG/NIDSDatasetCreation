@@ -20,7 +20,7 @@
 #include "inet/common/stlutils.h"
 #include "inet/linklayer/common/InterfaceTag_m.h"
 #include "inet/networklayer/common/InterfaceTable.h"
-#include "inet/queueing/common/LabelsTag_m.h"
+#include "inet/common/LabelsTag_m.h"
 
 #include "nidsdatasetcreation/common/packet/recorder/PcapngWriterWithLabeling.h"
 

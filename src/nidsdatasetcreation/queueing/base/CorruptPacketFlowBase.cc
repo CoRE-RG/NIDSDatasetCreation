@@ -15,7 +15,7 @@
 
 #include "nidsdatasetcreation/queueing/base/CorruptPacketFlowBase.h"
 
-#include "inet/queueing/common/LabelsTag_m.h"
+#include "inet/common/LabelsTag_m.h"
 
 namespace NIDSDatasetCreation {
 
