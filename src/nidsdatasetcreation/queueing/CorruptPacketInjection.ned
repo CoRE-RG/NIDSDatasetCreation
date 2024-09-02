@@ -29,7 +29,7 @@ simple CorruptPacketInjection extends CorruptPacketFlowBase
     parameters:
         @class(CorruptPacketInjection);
         // Interval between two injected packets    
-        double injectionInterval @mutable @unit(s) = default(0s);
+        volatile double injectionInterval @mutable @unit(s) = default(0s);
         // Destination port of injected packets
         int destPort @mutable = default(0);
         // Source port of injected packets
@@ -47,6 +47,6 @@ simple CorruptPacketInjection extends CorruptPacketFlowBase
         // Q-Tag VLAN ID (vid) of injected packets. If set to -1, no VLAN ID is added.
         int vid @mutable = default(-1);
         // Payload of injected packets in bytes
-        int payload @mutable @unit(Byte) = default(0Byte);
+        volatile int payload @mutable @unit(Byte) = default(0Byte);
         label = default("INJECTED");
 }

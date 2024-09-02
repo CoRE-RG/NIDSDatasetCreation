@@ -82,7 +82,7 @@ inet::Packet* CorruptPacketFlowBase::pullPacket(const cGate *gate)
     checkPacketStreaming(nullptr);
     inet::Packet* packet = nullptr;
     if (this->outPackets.empty()) {
-        packet = provider->pullPacket(inputGate->getPathStartGate());
+        packet = provider.pullPacket();
         take(packet);
         emit(inet::packetPulledInSignal, packet);
         processPacket(packet);
@@ -93,7 +93,8 @@ inet::Packet* CorruptPacketFlowBase::pullPacket(const cGate *gate)
         this->outPackets.erase(this->outPackets.begin());
     }
     emit(inet::packetPulledOutSignal, packet);
-    animatePullPacket(packet, outputGate, collector.getReferencedGate());
+    if (collector!=nullptr)
+        animatePullPacket(packet, outputGate, collector.getReferencedGate());
     updateDisplayString();
     return packet;
 }
@@ -141,6 +142,25 @@ void CorruptPacketFlowBase::processPacket(inet::Packet *packet)
         this->setLabel(packet, START_BENIGN_LABEL);
         this->previousPacketCorrupted = false;
     }
+}
+
+inet::Packet* CorruptPacketFlowBase::selfPullPacket(const cGate *gate)
+{
+    Enter_Method("pullPacket");
+        checkPacketStreaming(nullptr);
+        inet::Packet* packet = nullptr;
+        if (this->outPackets.empty()) {
+            packet = provider.pullPacket();
+            take(packet);
+            emit(inet::packetPulledInSignal, packet);
+            processPacket(packet);
+            handlePacketProcessed(packet);
+        }
+        else {
+            packet = this->outPackets.front();
+            this->outPackets.erase(this->outPackets.begin());
+        }
+        return packet;
 }
 
 bool CorruptPacketFlowBase::performCorruption()

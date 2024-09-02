@@ -59,7 +59,7 @@ inet::Packet* CorruptPacketElimination::canPullPacket(const cGate *gate) const
     Enter_Method("canPullPacket");
     auto packet = PacketFlowBase::canPullPacket(gate);
     if (packet != nullptr) {
-        packet = (const_cast<CorruptPacketElimination*>(this))->pullPacket(gate);
+        packet = (const_cast<CorruptPacketElimination*>(this))->selfPullPacket(gate);
         std::string packetName = packet->getName();
         if (packetName.find(CORRUPTED_KEY_STR) != std::string::npos) {
             this->bubble("Eliminate");

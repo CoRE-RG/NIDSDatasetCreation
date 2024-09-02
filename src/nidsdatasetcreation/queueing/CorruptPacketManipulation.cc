@@ -35,13 +35,15 @@ void CorruptPacketManipulation::handleParameterChange(const char* parname)
 {
     CorruptPacketFlowBase::handleParameterChange(parname);
     if (!parname || !strcmp(parname, "destPort")) {
-        if (int value = par("destPort").intValue() >= 0) {
+        int value = par("destPort").intValue();
+        if (value >= 0) {
             this->destPort = static_cast<uint16_t>(value);
             this->destPortSet = true;
         }
     }
     if (!parname || !strcmp(parname, "srcPort")) {
-        if (int value = par("srcPort").intValue() >= 0) {
+        int value = par("srcPort").intValue();
+        if (value >= 0) {
             this->srcPort = static_cast<uint16_t>(value);
             this->srcPortSet = true;
         }
@@ -79,13 +81,15 @@ void CorruptPacketManipulation::handleParameterChange(const char* parname)
         }
     }
     if (!parname || !strcmp(parname, "priority")) {
-        if (int value = par("priority").intValue() >= 0) {
+        int value = par("priority").intValue();
+        if (value >= 0) {
             this->priority = static_cast<uint8_t>(value);
             this->prioritySet = true;
         }
     }
     if (!parname || !strcmp(parname, "vid")) {
-        if (int value = par("vid").intValue() >= 0) {
+        int value = par("vid").intValue();
+        if (value >= 0) {
             this->vid = static_cast<uint16_t>(value);
             this->vidSet = true;
         }
@@ -124,7 +128,7 @@ void CorruptPacketManipulation::processPacket(inet::Packet* packet)
             macHeader->setDest(this->destMacAddress);
         }
         if (this->srcMacAddress != inet::MacAddress::UNSPECIFIED_ADDRESS) {
-            macHeader->setDest(this->srcMacAddress);
+            macHeader->setSrc(this->srcMacAddress);
         }
         inet::Ptr<inet::Ieee8021qTagEpdHeader> qTag;
         if (macHeader->getTypeOrLength() == inet::ETHERTYPE_8021Q_TAG) {

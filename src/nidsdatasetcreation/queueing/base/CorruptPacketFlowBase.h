@@ -100,6 +100,12 @@ class CorruptPacketFlowBase : public inet::queueing::PacketFlowBase
     virtual void initialize(int stage) override;
     virtual void processPacket(inet::Packet* packet) override;
     /**
+     * @brief pullPacket if it is called inside one module
+     *
+     * @return Returns packet
+     */
+    virtual inet::Packet *selfPullPacket(const cGate *gate);
+    /**
      * @brief Check if execution of corruption is allowed
      *
      * @return Returns TRUE if execution is allowed

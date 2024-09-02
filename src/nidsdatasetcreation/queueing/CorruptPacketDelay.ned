@@ -29,7 +29,7 @@ simple CorruptPacketDelay extends CorruptPacketFlowBase
     parameters:
         @class(CorruptPacketDelay);
         // Time that a corrupted packet is delayed
-        double delayTime @mutable @unit(s) = default(0s);
+        volatile double delayTime @mutable @unit(s) = default(0s);
         // Time following packets wait for the delayed packet at maximum. After that time following packets overtake the currently delayed packet.
         double backlogDelayTime @unit(s) = default(0s);
         label = default("DELAYED");    

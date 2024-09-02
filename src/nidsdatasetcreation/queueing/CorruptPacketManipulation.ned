@@ -45,6 +45,6 @@ simple CorruptPacketManipulation extends CorruptPacketFlowBase
         // Q-Tag VLAN ID (vid) the packet is manipulated to. Default is -1, which means no manipulation.
         int vid = default(-1);
         // Q-Tag drop eligible indicator (dei) the packet is manipulated to. Default is 0Byte, which means no manipulation.
-        int payload @mutable @unit(Byte) = default(0Byte);
+        volatile int payload @mutable @unit(Byte) = default(0Byte);
         label = default("MANIPULATED");
 }

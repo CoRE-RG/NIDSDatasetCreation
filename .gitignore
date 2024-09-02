@@ -16,3 +16,4 @@ src/*.so
 *.vci
 *.pcap
 *.exe
+*.ipynb_checkpoints*
