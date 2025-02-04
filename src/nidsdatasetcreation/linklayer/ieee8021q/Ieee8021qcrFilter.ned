@@ -24,12 +24,14 @@ import inet.queueing.contract.IPacketMeter;
 
 import inet.protocolelement.shaper.GroupEligibilityTimeTable;
 import nidsdatasetcreation.protocolelement.shaper.GroupEligibilityTimeTableWithStatistics;
+import nidsdatasetcreation.protocolelement.shaper.GroupEligibilityTimeTableOneGroup;
+
+import inet.protocolelement.contract.ITable;
 
 //
 // ATS filter module with group eligibility time and SDU filter. 
 // @see groupEligibilityTimeTableWithStatistics, GroupEligibilityTimeMeterWithStatistics
 // @author Teresa Lübeck 
-//
 
 module Ieee8021qcrFilter like IPacketFilter
 {
@@ -45,7 +47,7 @@ module Ieee8021qcrFilter like IPacketFilter
         output out;
         
     submodules:
-        groupEligibilityTimeTable: GroupEligibilityTimeTableWithStatistics {
+        groupEligibilityTimeTable: <default("GroupEligibilityTimeTableWithStatistics")> like ITable {
             @display("p=43,30");
         }        
         classifier: <default("StreamClassifier")> like IPacketClassifier {
