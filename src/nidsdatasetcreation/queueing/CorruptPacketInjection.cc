@@ -26,6 +26,9 @@
 #include "inet/physicallayer/wired/ethernet/EthernetPhyHeader_m.h"
 #include "inet/transportlayer/udp/Udp.h"
 #include "inet/transportlayer/udp/UdpHeader_m.h"
+#include "inet/linklayer/common/PcpTag_m.h"
+#include "inet/protocolelement/shaper/EligibilityTimeTag_m.h"
+
 
 namespace NIDSDatasetCreation {
 
@@ -93,6 +96,12 @@ void CorruptPacketInjection::handleParameterChange(const char* parname)
     if (!parname || !strcmp(parname, "payload")) {
         this->payload = par("payload").intValue();
     }
+    if (!parname || !strcmp(parname, "addEligibilityTimeTag")) {
+            this->addEligibilityTimeTag = par("addEligibilityTimeTag").boolValue();
+        }
+    if (!parname || !strcmp(parname, "eligbilityTimeIsZeroSeconds")) {
+                this->eligbilityTimeIsZeroSeconds = par("eligbilityTimeIsZeroSeconds").boolValue();
+            }
 }
 
 void CorruptPacketInjection::initialize(int stage)
@@ -109,6 +118,8 @@ void CorruptPacketInjection::initialize(int stage)
         this->handleParameterChange("priority");
         this->handleParameterChange("vid");
         this->handleParameterChange("payload");
+        this->handleParameterChange("addEligibilityTimeTag");
+        this->handleParameterChange("eligbilityTimeIsZeroSeconds");
     }
 }
 
@@ -174,6 +185,7 @@ inet::Packet* CorruptPacketInjection::createInjectionPacket()
         qTag->setDei(false);
         qTag->setTypeOrLength(inet::ETHERTYPE_IPv4);
         packet->insertAtFront(qTag);
+        packet->addTagIfAbsent<inet::PcpInd>()->setPcp(qTag->getPcp());
     }
     auto macHeader = inet::makeShared<inet::EthernetMacHeader>();
     macHeader->setDest(this->destMacAddress);
@@ -204,6 +216,16 @@ inet::Packet* CorruptPacketInjection::createInjectionPacket()
     fcs->setFcs(inet::ethernetCRC(bytes.data(), packet->getByteLength()));
     packet->insertAtBack(fcs);
     this->setLabel(packet, this->label);
+
+    if (this->addEligibilityTimeTag) {
+            if (this -> eligbilityTimeIsZeroSeconds) {
+                packet->addTagIfAbsent<inet::EligibilityTimeTag>()->setEligibilityTime(0);
+            }
+            else {
+                packet->addTagIfAbsent<inet::EligibilityTimeTag>()->setEligibilityTime(inet::SIMTIME_AS_CLOCKTIME(simTime()));
+            }
+        }
+
     return packet;
 }
 

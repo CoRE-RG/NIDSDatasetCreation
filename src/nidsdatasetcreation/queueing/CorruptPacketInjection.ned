@@ -22,7 +22,7 @@ import nidsdatasetcreation.queueing.base.CorruptPacketFlowBase;
 //
 // @see CorruptPacketFlowBase, CorruptPacketDelay, CorruptPacketElimination, CorruptPacketManipulation, CorruptPacketReordering
 //
-// @author Philipp Meyer
+// @author Philipp Meyer, Teresa Lübeck
 //
 simple CorruptPacketInjection extends CorruptPacketFlowBase
 {
@@ -48,5 +48,10 @@ simple CorruptPacketInjection extends CorruptPacketFlowBase
         int vid @mutable = default(-1);
         // Payload of injected packets in bytes
         volatile int payload @mutable @unit(Byte) = default(0Byte);
+        // If a EligibilityTimeTag has to be added. Needed if injection is before a eligibilityTimeQueue
+        bool addEligibilityTimeTag = default(false);
+        // The added eligibility time can either be the creation time of the packet, or 0s (so the packet is inserted at the front)
+        bool eligbilityTimeIsZeroSeconds = default(false);
+                
         label = default("INJECTED");
 }

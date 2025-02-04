@@ -33,7 +33,7 @@ namespace NIDSDatasetCreation {
  * 
  * @ingroup queueing
  * 
- * @author Philipp Meyer
+ * @author Philipp Meyer, Teresa Lübeck
  */
 class CorruptPacketInjection : public CorruptPacketFlowBase
 {
@@ -74,6 +74,14 @@ class CorruptPacketInjection : public CorruptPacketFlowBase
      * @brief Q-Tag vlan id of injected packet
      */
     uint16_t vid;
+    /**
+     * @brief if EligibilityTimeTag needs to be added to packet
+     */
+    bool addEligibilityTimeTag;
+    /**
+     * @brief if if injected Packet is inserted at front of queue
+     */
+    bool eligbilityTimeIsZeroSeconds;
 
   private:
     /**
